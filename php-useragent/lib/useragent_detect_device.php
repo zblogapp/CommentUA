@@ -5,7 +5,7 @@
  * @author zsx <zsx@zsxsoft.com>
  * @author Kyle Baker <kyleabaker@gmail.com>
  * @author Fernando Briano <transformers.es@gmail.com>
- * @copyright Copyright 2014 zsx
+ * @copyright Copyright 2014-2015 zsx
  * @copyright Copyright 2008-2014 Kyle Baker (email: kyleabaker@gmail.com)
  * @copyright 2008 Fernando Briano (email : transformers.es@gmail.com)
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
@@ -17,258 +17,291 @@
 class UserAgent_Detect_Device {
 	public static function analyze($useragent) {
 		$link = '';
-		$title = '';
-		$code = '';
+		$brand = '';
+		$model = '';
+		$image_url = '';
 
 		// BenQ-Siemens (Openwave)
 		/*elseif(preg_match('/[^M]SIE/i', $useragent))
 		{
 		$link = "http://en.wikipedia.org/wiki/BenQ-Siemens";
-		$title = "BenQ-Siemens";
+		$brand = "BenQ-Siemens";
 
 		if(preg_match('/[^M]SIE-([.0-9a-zA-Z]+)\//i', $useragent, $regmatch))
 		{
 		$title .= " ".$regmatch[1];
 		}
 
-		$code = "benq-siemens";
+		$image_url = "benq-siemens";
 		}*/
 
 		// meizu
-		if (preg_match('/(MEIZU (MX|M9)|M030)|MX-3/i', $useragent)) {
+		if (preg_match('/MEIZU[ _-](MX|M9)|MX[0-9]{0,1};|M0(4|5)\d|M35\d/i', $useragent)) {
 			$link = "http://www.meizu.com/";
-			$title = "Meizu";
-			$code = "meizu";
+			$brand = "Meizu";
+			$image_url = "meizu";
+
+			if (preg_match('/(M35[0-9]+)|(M04\d)|(M05\d)/i', $useragent, $regmatch)) {
+				$model = $regmatch[count($regmatch) - 1];
+			} else if (preg_match('/(MX[0-9]{0,1})/i', $useragent, $regmatch)) {
+				$model = $regmatch[count($regmatch) - 1];
+			}
+
 		}
 
 		// xiaomi
 		elseif (preg_match('/MI-ONE|MI \d|HM NOTE/i', $useragent)) {
 			$link = "http://www.xiaomi.com/";
-			$title = "Xiaomi";
+			$brand = "Xiaomi";
 
 			if (preg_match('/HM NOTE ([A-Z0-9]+)/i', $useragent, $regmatch)) {
-				$title .= " HM-NOTE " . $regmatch[1];
+				$model = "HM-NOTE " . $regmatch[1];
 			} else if (preg_match('/MI ([A-Z0-9]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
 			} else if (preg_match('/MI-ONE/i', $useragent, $regmatch)) {
-				$title .= " 1";
+				$model = "1";
 			}
 
-			$code = "xiaomi";
+			$image_url = "xiaomi";
 		}
 
 		// BlackBerry
 		elseif (preg_match('/BlackBerry/i', $useragent)) {
 			$link = "http://www.blackberry.com/";
-			$title = "BlackBerry";
+			$brand = "BlackBerry";
 
-			if (preg_match('/blackberry([.0-9a-zA-Z]+)\//i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+			if (preg_match('/blackberry ?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model = $regmatch[1];
 			}
 
-			$code = "blackberry";
+			$image_url = "blackberry";
 		}
 		// Coolpad
 		elseif (preg_match('/Coolpad/i', $useragent)) {
 			$link = "http://www.coolpad.com/";
-			$title = "CoolPad";
+			$brand = "CoolPad";
 
 			if (preg_match('/CoolPad( |\_)?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[2];
+				$model = $regmatch[2];
 			}
 
-			$code = "coolpad";
+			$image_url = "coolpad";
 		}
 
 		// Dell
-		elseif (preg_match('/Dell Mini 5/i', $useragent)) {
+		elseif (preg_match('/Dell Streak/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Dell_Streak";
-			$title = "Dell Mini 5";
-			$code = "dell";
-		} elseif (preg_match('/Dell Streak/i', $useragent)) {
-			$link = "http://en.wikipedia.org/wiki/Dell_Streak";
-			$title = "Dell Streak";
-			$code = "dell";
+			$brand = "Dell Streak";
+			$image_url = "dell";
 		} elseif (preg_match('/Dell/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Dell";
-			$title = "Dell";
-			$code = "dell";
+			$brand = "Dell";
+			$image_url = "dell";
+		}
+		// Google TV
+		elseif (preg_match('/Google ?TV/i', $useragent)) {
+			$link = "https://www.android.com/tv/";
+			$brand = "Google TV";
+			$image_url = "android";
 		}
 
-		// Google
-		elseif (preg_match('/Nexus/i', $useragent)) {
-			$link = "https://www.google.com/nexus/";
-			$title = "Nexus";
-			$code = "google-nexusone";
-			if (preg_match('/Nexus ([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+		// Hisense
+		elseif (preg_match('/Hasee/i', $useragent)) {
+			$link = "http://www.hasee.com/";
+			$brand = "Hasee";
+			$image_url = "hasee";
+			if (preg_match('/Hasee (([^;\/]+) Build|([^;\/)]+)[);\/ ])/i', $useragent, $regmatch)) {
+				$model = $regmatch[2];
 			}
 		}
 
 		// HTC
 		elseif (preg_match('/Desire/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/HTC_Desire";
-			$title = "HTC Desire";
-			$code = "htc";
+			$brand = "HTC Desire";
+			$image_url = "htc";
 		} elseif (preg_match('/Rhodium/i', $useragent)
 			|| preg_match('/HTC[_|\ ]Touch[_|\ ]Pro2/i', $useragent)
 			|| preg_match('/WMD-50433/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/HTC_Touch_Pro2";
-			$title = "HTC Touch Pro2";
-			$code = "htc";
+			$brand = "HTC Touch Pro2";
+			$image_url = "htc";
 		} elseif (preg_match('/HTC[_|\ ]Touch[_|\ ]Pro/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/HTC_Touch_Pro";
-			$title = "HTC Touch Pro";
-			$code = "htc";
+			$brand = "HTC Touch Pro";
+			$image_url = "htc";
 		} elseif (preg_match('/Windows Phone .+ by HTC/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/High_Tech_Computer_Corporation";
-			$title = "HTC";
+			$brand = "HTC";
 			if (preg_match('/Windows Phone ([0-9A-Za-z]+) by HTC/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
 			}
-			$code = "htc";
+			$image_url = "htc";
 		} elseif (preg_match('/HTC/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/High_Tech_Computer_Corporation";
-			$title = "HTC";
+			$brand = "HTC";
 
-			if (preg_match('/HTC[\ |_|-]8500/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_Startrek";
-				$title .= " Startrek";
-			} elseif (preg_match('/HTC[\ |_|-]Hero/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_Hero";
-				$title .= " Hero";
-			} elseif (preg_match('/HTC[\ |_|-]Legend/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_Legend";
-				$title .= " Legend";
-			} elseif (preg_match('/HTC[\ |_|-]Magic/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_Magic";
-				$title .= " Magic";
-			} elseif (preg_match('/HTC[\ |_|-]P3450/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_Touch";
-				$title .= " Touch";
-			} elseif (preg_match('/HTC[\ |_|-]P3650/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_Polaris";
-				$title .= " Polaris";
-			} elseif (preg_match('/HTC[\ |_|-]S710/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_S710";
-				$title .= " S710";
-			} elseif (preg_match('/HTC[\ |_|-]Tattoo/i', $useragent)) {
-				$link = "http://en.wikipedia.org/wiki/HTC_Tattoo";
-				$title .= " Tattoo";
-			} elseif (preg_match('/HTC[\ |_|-]?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+			if (preg_match('/HTC[\ |_|-]?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model = $regmatch[1];
 			} elseif (preg_match('/HTC([._0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
 				$title .= str_replace("_", " ", $regmatch[1]);
 			}
 
-			$code = "htc";
+			$image_url = "htc";
 		}
+
+		// Hisense
+		elseif (preg_match('/Hisense|HS-(?:U|EG?|I|T|X)[0-9]+[a-z0-9\-]*/i', $useragent)) {
+			$link = "http://www.hisense.com/";
+			$brand = "Hisense";
+			$image_url = "hisense";
+			if (preg_match('/(HS-(?:U|EG?|I|T|X)[0-9]+[a-z0-9\-]*)/i', $useragent, $regmatch)) {
+				$model = $regmatch[1];
+			}
+		}
+
 		// huawei
 		elseif (preg_match('/Huawei/i', $useragent)) {
 			$link = "http://www.huawei.com/cn/";
-			$title = "Huawei";
-			$code = "huawei";
+			$brand = "Huawei";
+			$image_url = "huawei";
 			if (preg_match('/HUAWEI( |\_)?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[2];
+				$model = $regmatch[2];
 			}
+		} elseif (preg_match('/HONOR[\ ]?([A-Za-z0-9]{3,4}\-[A-Za-z0-9]{3,4})|(Che[0-9]{1}-[a-zA-Z0-9]{4})/i', $useragent, $regmatch)) {
+			$link = "http://www.huawei.com/cn/";
+			$brand = "Huawei";
+			$model = $regmatch[count($regmatch) - 1];
+			$image_url = "huawei";
+		} elseif (preg_match('/(H60-L\d+)/i', $useragent, $regmatch)) {
+			$link = "http://www.huawei.com/cn/";
+			$brand = "Huawei";
+			$model = $regmatch[count($regmatch) - 1];
+			$image_url = "huawei";
 		}
+
 		// Kindle
 		elseif (preg_match('/Kindle/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Amazon_Kindle";
-			$title = "Kindle";
+			$brand = "Kindle";
 
 			if (preg_match('/Kindle\/([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
 			}
 
-			$code = "kindle";
+			$image_url = "kindle";
 		}
 		// K-Touch
 		elseif (preg_match('/k-touch/i', $useragent)) {
 			$link = "http://www.k-touch.cn/";
-			$title = "K-Touch";
-			$code = "k-touch";
+			$brand = "K-Touch";
+			$image_url = "k-touch";
 			if (preg_match('/k-touch[ _]([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
 			}
 		}
 		// Lenovo
-		elseif (preg_match('/Lenovo|lepad/i', $useragent)) {
+		elseif (preg_match('/Lenovo|lepad|Yoga/i', $useragent)) {
 			$link = "http://www.lenovo.com.cn";
-			$title = "Lenovo";
+			$brand = "Lenovo";
 
 			if (preg_match('/Lenovo[\ |\-|\/|\_]([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
+			} else if (preg_match('/Yoga( Tablet)?[\ |\-|\/|\_]([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model = "Yoga " . $regmatch[2];
 			} else if (preg_match('/lepad/i', $useragent)) {
-				$title .= ' LePad';
+				$model = 'LePad';
 			}
 
-			$code = "lenovo";
+			$image_url = "lenovo";
 
+		}
+		// Letv
+		elseif (preg_match('/Letv/i', $useragent)) {
+			$link = "http://www.letv.com";
+			$brand = "Letv";
+
+			if (preg_match('/Letv?([- \/])([0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model = $regmatch[2];
+			}
+
+			$image_url = "letv";
 		}
 		// LG
 		elseif (preg_match('/LG/i', $useragent)) {
 			$link = "http://www.lgmobile.com";
-			$title = "LG";
+			$brand = "LG";
 
 			if (preg_match('/LGE?([- \/])([0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[2];
+				$model = $regmatch[2];
 			}
 
-			$code = "lg";
+			$image_url = "lg";
 		}
 
 		// Motorola
 		elseif (preg_match('/\ Droid/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Motorola_Droid";
-			$title .= "Motorola Droid";
-			$code = "motorola";
+			$brand = "Motorola";
+			$model = "Droid";
+			$image_url = "motorola";
 		} elseif (preg_match('/XT720/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Motorola";
-			$title .= "Motorola Motoroi (XT720)";
-			$code = "motorola";
+			$brand = "Motorola";
+			$model = "XT720";
+			$image_url = "motorola";
 		} elseif (preg_match('/MOT-/i', $useragent)
 			|| preg_match('/MIB/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Motorola";
-			$title = "Motorola";
+			$brand = "Motorola";
 
 			if (preg_match('/MOTO([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
 			}
 			if (preg_match('/MOT-([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
 			}
 
-			$code = "motorola";
+			$image_url = "motorola";
 		} elseif (preg_match('/XOOM/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Motorola_Xoom";
-			$title .= "Motorola Xoom";
-			$code = "motorola";
+			$brand = "Motorola";
+			$model = "Xoom";
+			$image_url = "motorola";
 		}
 
+		// Microsoft
+		elseif (preg_match('/Microsoft/i', $useragent)) {
+			$link = "http://www.microsoft.com/";
+			$brand = "Microsoft";
+			$image_url = "microsoft";
+			if (preg_match('/Lumia ([0-9]+)/i', $useragent, $regmatch)) {
+				$model = "Lumia " . $regmatch[1];
+			}
+			//}
+		}
 		// Nintendo
 		elseif (preg_match('/Nintendo/i', $useragent)) {
-			$title = "Nintendo";
+			$brand = "Nintendo";
+			$link = "http://www.nintendo.com/";
+			$image_url = "nintendo";
 
 			if (preg_match('/Nintendo DSi/i', $useragent)) {
 				$link = "http://www.nintendodsi.com/";
-				$title .= " DSi";
-				$code = "nintendodsi";
+				$model = "DSi";
+				$image_url = "nintendodsi";
 			} elseif (preg_match('/Nintendo DS/i', $useragent)) {
 				$link = "http://www.nintendo.com/ds";
-				$title .= " DS";
-				$code = "nintendods";
+				$model = "DS";
+				$image_url = "nintendods";
 			} elseif (preg_match('/Nintendo WiiU/i', $useragent)) {
 				$link = "http://www.nintendo.com/wiiu";
-				$title .= " Wii U";
-				$code = "nintendowiiu";
+				$model = "Wii U";
+				$image_url = "nintendowiiu";
 			} elseif (preg_match('/Nintendo Wii/i', $useragent)) {
 				$link = "http://www.nintendo.com/wii";
-				$title .= " Wii";
-				$code = "nintendowii";
-			} else {
-				$link = "http://www.nintendo.com/";
-				$code = "nintendo";
+				$model = "Wii";
+				$image_url = "nintendowii";
 			}
 		}
 
@@ -277,21 +310,21 @@ class UserAgent_Detect_Device {
 			/*if (!(/S(eries)?60/i.test(useragent)) || !/Symbian/i.test(useragent))
 			{*/
 			$link = "http://www.nokia.com/";
-			$title = "Nokia";
-			$code = "nokia";
+			$brand = "Nokia";
+			$image_url = "nokia";
 			if (preg_match('/Nokia(E|N| )?([0-9]+)/i', $useragent, $regmatch)) {
-				if (preg_match('/IEMobile|WPDesktop/i', $useragent)) {
+				if (preg_match('/IEMobile|WPDesktop|Edge/i', $useragent)) {
 					// Nokia Windows Phone
 					if ($regmatch[2] == '909') {
 						$regmatch[2] = '1020';
 					}
 					// Lumia 1020
-					$title .= " Lumia " . $regmatch[2];
+					$model = "Lumia " . $regmatch[2];
 				} else {
-					$title .= " " . $regmatch[1] . $regmatch[2];
+					$model = $regmatch[1] . $regmatch[2];
 				}
 			} elseif (preg_match('/Lumia ([0-9]+)/i', $useragent, $regmatch)) {
-				$title .= " Lumia " . $regmatch[1];
+				$model = "Lumia " . $regmatch[1];
 			}
 
 			//}
@@ -300,179 +333,202 @@ class UserAgent_Detect_Device {
 		// Onda
 		elseif (preg_match('/onda/i', $useragent)) {
 			$link = "http://www.onda.cn/";
-			$title = "Onda";
-			$code = "onda";
+			$brand = "Onda";
+			$image_url = "onda";
 		}
 		// Onda
 		elseif (preg_match('/oppo/i', $useragent)) {
 			$link = "http://www.oppo.com/";
-			$title = "OPPO";
-			$code = "oppo";
+			$brand = "OPPO";
+			$image_url = "oppo";
 		}
+		// Oneplus
+		elseif (preg_match('/A0001|A2005|E1003|One [A-Z]\d{4}/i', $useragent)) {
+			$link = "http://www.oneplus.cn/";
+			$brand = "OnePlus";
+			$image_url = "oneplus";
 
-		// OLPC (One Laptop Per $child)
-		elseif (preg_match('/OLPC/i', $useragent)) {
-			$link = "http://www.laptop.org/";
-			$title = "OLPC (XO)";
-			$code = "olpc";
+			if (preg_match('/A0001/i', $useragent)) {
+				$model = "One";
+			} else if (preg_match('/A2005/i', $useragent)) {
+				$model = "Two";
+			} else if (preg_match('/E1003/i', $useragent)) {
+				$model = "X";
+			}
 		}
-
 		// Palm
 		elseif (preg_match('/\ Pixi\//i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Palm_Pixi";
-			$title = "Palm Pixi";
-			$code = "palm";
+			$brand = "Palm Pixi";
+			$image_url = "palm";
 		} elseif (preg_match('/\ Pre\//i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Palm_Pre";
-			$title = "Palm Pre";
-			$code = "palm";
+			$brand = "Palm Pre";
+			$image_url = "palm";
 		} elseif (preg_match('/Palm/i', $useragent)) {
 			$link = "http://www.palm.com/";
-			$title = "Palm";
-			$code = "palm";
-		} elseif (preg_match('/wp-webos/i', $useragent)) {
+			$brand = "Palm";
+			$image_url = "palm";
+		} elseif (preg_match('/webos/i', $useragent)) {
 			$link = "http://www.palm.com/";
-			$title = "Palm";
-			$code = "palm";
+			$brand = "Palm";
+			$image_url = "palm";
 		}
 
 		// Playstation
 		elseif (preg_match('/PlayStation/i', $useragent)) {
-			$title = "PlayStation";
+			$brand = "PlayStation";
 
 			if (preg_match('/[PS|PlayStation\ ]3/i', $useragent)) {
 				$link = "http://www.us.playstation.com/PS3";
-				$title .= " 3";
+				$model = "3";
 			} elseif (preg_match('/[PS|PlayStation\ ]4/i', $useragent)) {
 				$link = "http://www.us.playstation.com/PS4";
-				$title .= " 4";
-			} elseif (preg_match('/[PlayStation Portable|PSP]/i', $useragent)) {
+				$model = "4";
+			} elseif (preg_match('/PlayStation Portable|PSP/i', $useragent)) {
 				$link = "http://www.us.playstation.com/PSP";
-				$title .= " Portable";
-			} elseif (preg_match('/[PlayStation Vita|PSVita]/i', $useragent)) {
+				$model = "Portable";
+			} elseif (preg_match('/PlayStation Vita|PSVita/i', $useragent)) {
 				$link = "http://us.playstation.com/psvita/";
-				$title .= " Vita";
+				$model = "Vita";
 			} else {
 				$link = "http://www.us.playstation.com/";
 			}
 
-			$code = "playstation";
+			$image_url = "playstation";
 		}
 
 		// Samsung
 		elseif (preg_match('/Galaxy Nexus/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Galaxy_Nexus";
-			$title = "Galaxy Nexus";
-			$code = "samsung";
-		} elseif (preg_match('/SmartTV/i', $useragent)) {
-			$link = "http://www.freethetvchallenge.com/details/faq";
-			$title = "Samsung Smart TV";
-			$code = "samsung";
-		} elseif (preg_match('/Samsung/i', $useragent)) {
+			$brand = "Galaxy Nexus";
+			$image_url = "samsung";
+		} elseif (preg_match('/Smart-?TV/i', $useragent)) {
+			$link = "http://www.samsung.com/us/experience/smart-tv/";
+			$brand = "Samsung Smart TV";
+			$image_url = "samsung";
+		} elseif (preg_match('/Samsung|SM-|GT-|SCH-|SHV-/i', $useragent)) {
 			$link = "http://www.samsungmobile.com/";
-			$title = "Samsung";
+			$brand = "Samsung";
 
-			if (preg_match('/Samsung-([.\-0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+			if (preg_match('/(Samsung-|GT-|SM-|SCH-|SHV-)([.\-0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model = $regmatch[2];
 			}
 
-			$code = "samsung";
+			$image_url = "samsung";
 		}
 
 		// Sony Ericsson
 		elseif (preg_match('/SonyEricsson/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/SonyEricsson";
-			$title = "SonyEricsson";
+			$brand = "SonyEricsson";
 
 			if (preg_match('/SonyEricsson([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				if (strtolower($regmatch[1]) == strtolower("U20i")) {
-					$title .= " Xperia X10 Mini Pro";
-				} else {
-					$title .= " " . $regmatch[1];
-				}
+				$model = $regmatch[1];
 			}
 
-			$code = "sonyericsson";
+			$image_url = "sonyericsson";
 		}
-
+		// vivo
+		elseif (preg_match('/tcl/i', $useragent)) {
+			$link = "http://www.tcl.com/";
+			$brand = "TCL";
+			$image_url = "tcl";
+			if (preg_match('/TCL[\ |\-]([0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model = $regmatch[1];
+			}
+		}
 		// vivo
 		elseif (preg_match('/vivo/i', $useragent)) {
 			$link = "http://www.vivo.com.cn/";
-			$title = "vivo";
-			$code = "vivo";
+			$brand = "vivo";
+			$image_url = "vivo";
 			if (preg_match('/VIVO ([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[1];
+				$model = $regmatch[1];
 			}
 		}
 
+		// Xperia
+		elseif (preg_match('/Xperia/i', $useragent)) {
+			$link = "http://www.sonymobile.com/";
+			$brand = "Xperia";
+			$image_url = "xperia";
+			if (preg_match('/Xperia(-T)?( |\_|\-)?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model = $regmatch[3];
+			}
+		}
 		// ZTE
 		elseif (preg_match('/zte/i', $useragent)) {
 			$link = "http://www.zte.com.cn/cn/";
-			$title = "ZTE";
-			$code = "zte";
+			$brand = "ZTE";
+			$image_url = "zte";
 			if (preg_match('/ZTE(-T)?( |\_|\-)?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " " . $regmatch[3];
+				$model = $regmatch[3];
 			}
 		}
 
 		// Ubuntu Phone/Tablet
 		elseif (preg_match('/Ubuntu\;\ Mobile/i', $useragent)) {
 			$link = "http://www.ubuntu.com/phone";
-			$title = "Ubuntu Phone";
-			$code = "ubuntutouch";
+			$brand = "Ubuntu Phone";
+			$image_url = "ubuntutouch";
 		} elseif (preg_match('/Ubuntu\;\ Tablet/i', $useragent)) {
 			$link = "http://www.ubuntu.com/tablet";
-			$title = "Ubuntu Tablet";
-			$code = "ubuntutouch";
+			$brand = "Ubuntu Tablet";
+			$image_url = "ubuntutouch";
+		}
+
+		// Google
+		elseif (preg_match('/Nexus/i', $useragent)) {
+			$link = "https://www.google.com/nexus/";
+			$brand = "Google";
+			$image_url = "google-nexusone";
+			$model = "Nexus";
+			if (preg_match('/Nexus ([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
+				$model .= " " . $regmatch[1];
+			}
 		}
 
 		// Apple
 		elseif (preg_match('/iPad/i', $useragent)) {
 			$link = "http://www.apple.com/itunes";
-			$title = "iPad";
-
-			if (preg_match('/CPU\ OS\ ([._0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " iOS " . str_replace("_", ".", $regmatch[1]);
-			}
-
-			$code = "ipad";
+			$model = "iPad";
+			$brand = 'Apple';
+			$image_url = "ipad";
 		} elseif (preg_match('/iPod/i', $useragent)) {
 			$link = "http://www.apple.com/itunes";
-			$title = "iPod";
-
-			if (preg_match('/iPhone\ OS\ ([._0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " iOS " . str_replace("_", ".", $regmatch[1]);
-			}
-
-			$code = "iphone";
+			$model = "iPod";
+			$brand = 'Apple';
+			$image_url = "iphone";
 		} elseif (preg_match('/iPhone/i', $useragent)) {
 			$link = "http://www.apple.com/iphone";
-			$title = "iPhone";
-
-			if (preg_match('/iPhone\ OS\ ([._0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title .= " iOS " . str_replace("_", ".", $regmatch[1]);
-			}
-
-			$code = "iphone";
+			$model = "iPhone";
+			$brand = 'Apple';
+			$image_url = "iphone";
 		}
 
 		//Some special UA..
 		//is MSIE
 		elseif (preg_match('/MSIE.+?Windows.+?Trident/i', $useragent) && !preg_match('/Windows ?Phone/i', $useragent)) {
 			$link = "";
-			$title = "";
-			$code = "null";
+			$brand = "";
+			$image_url = "null";
 		}
 		// No Device match
 		else {
-			$code = "null";
+			$image_url = "null";
 		}
+
+		$title = $brand . ($model == '' ? '' : ' ' . $model);
 
 		return array(
 			'link' => $link,
 			'title' => $title,
-			'code' => $code,
+			'model' => $model,
+			'brand' => $brand,
+			'code' => $image_url,
 			'dir' => 'device',
+			'type' => 'device',
 		);
 
 	}

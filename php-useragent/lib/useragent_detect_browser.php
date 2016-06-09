@@ -5,7 +5,7 @@
  * @author zsx <zsx@zsxsoft.com>
  * @author Kyle Baker <kyleabaker@gmail.com>
  * @author Fernando Briano <transformers.es@gmail.com>
- * @copyright Copyright 2014 zsx
+ * @copyright Copyright 2014-2015 zsx
  * @copyright Copyright 2008-2014 Kyle Baker (email: kyleabaker@gmail.com)
  * @copyright 2008 Fernando Briano (email : transformers.es@gmail.com)
  * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
@@ -23,6 +23,7 @@ class useragent_detect_browser {
 		'360se|360ee|360\ aphone\ browser',
 		'Abolimba',
 		'Acoo\ Browser',
+		'ANTFresco',
 		'Alienforce',
 		'Amaya',
 		'Amiga-AWeb',
@@ -37,7 +38,6 @@ class useragent_detect_browser {
 		'Beamrise',
 		'Beonex',
 		'BA?IDUBrowser|BaiduHD',
-		'BlackBerry',
 		'Blackbird',
 		'BlackHawk',
 		'Blazer',
@@ -68,7 +68,6 @@ class useragent_detect_browser {
 		'CrMo',
 		'Cruz',
 		'Cyberdog',
-		'DPlus',
 		'Deepnet\ Explorer',
 		'Demeter',
 		'DeskBrowse',
@@ -87,7 +86,8 @@ class useragent_detect_browser {
 		'EnigmaFox',
 		'Epic',
 		'Epiphany',
-		'Escape',
+		'Escape|Espial',
+		'FBAV',
 		'Fennec',
 		'Firebird',
 		'Fireweb\ Navigator',
@@ -100,6 +100,11 @@ class useragent_detect_browser {
 		'GoSurf',
 		'GranParadiso',
 		'GreenBrowser',
+		'GSA',
+		'google earth',
+		'google.android.apps',
+		'googleplus',
+		'youtube',
 		'Hana',
 		'HotJava',
 		'Hv3',
@@ -108,15 +113,18 @@ class useragent_detect_browser {
 		'IBM\ WebExplorer',
 		'JuziBrowser',
 		'MiuiBrowser',
+		'Microsoft Office',
 		'MxNitro',
 		'IBrowse',
 		'iCab',
 		'IceBrowser',
 		'Iceape',
 		'IceCat',
+		'IceDragon',
 		'IceWeasel',
 		'iNet\ Browser',
 		'iRider',
+		'iTunes',
 		'InternetSurfboard',
 		'Jasmine',
 		'K-Meleon',
@@ -125,6 +133,7 @@ class useragent_detect_browser {
 		'Kazehakase',
 		'Strata',
 		'KKman',
+		'Kinza',
 		'KMail',
 		'KMLite',
 		'Konqueror',
@@ -142,6 +151,7 @@ class useragent_detect_browser {
 		'Maxthon',
 		'\ MIB\/',
 		'Tablet\ browser',
+		'MicroMessenger',
 		'Midori',
 		'Minefield',
 		'MiniBrowser',
@@ -162,6 +172,7 @@ class useragent_detect_browser {
 		'Netscape',
 		'NetSurf',
 		'NF-Browser',
+		'Nichrome\/self',
 		'NokiaBrowser',
 		'Novarra-Vision',
 		'Obigo',
@@ -184,16 +195,20 @@ class useragent_detect_browser {
 		'Podkicker\ Pro',
 		'Pogo',
 		'Polaris',
+		'Polarity',
 		'Prism',
+		'Puffin',
 		'M?QQBrowser',
 		'QQ(?!Download|Pinyin)',
 		'QtWeb\ Internet\ Browser',
+		'QtCarBrowser',
 		'QupZilla',
 		'rekonq',
 		'retawq',
 		'RockMelt',
 		'Ryouko',
 		'SaaYaa',
+		'SailfishBrowser',
 		'SeaMonkey',
 		'SEMC-Browser',
 		'SEMC-java',
@@ -206,13 +221,13 @@ class useragent_detect_browser {
 		'Silk',
 		'SlimBoat',
 		'SlimBrowser',
+		'Superbird',
 		'SmartTV',
 		'Songbird',
 		'Stainless',
 		'SubStream',
 		'Sulfur',
 		'Sundance',
-		'Sunrise',
 		'Sunrise',
 		'Surf',
 		'Swiftfox',
@@ -225,7 +240,8 @@ class useragent_detect_browser {
 		'TenFourFox',
 		'TheWorld',
 		'Thunderbird',
-		'Tizen',
+		'TizenBrowser',
+		'Tizen Browser',
 		'Tjusig',
 		'TencentTraveler',
 		'UC?\ ?Browser|UCWEB',
@@ -241,12 +257,16 @@ class useragent_detect_browser {
 		'Vonkeror',
 		'w3m',
 		'IEMobile',
+		'Waterfox',
 		'WebianShell',
 		'Webrender',
 		'WeltweitimnetzBrowser',
+		'WhatsApp',
+		'Weibo',
 		'wKiosk',
 		'WorldWideWeb',
 		'wget',
+		'WhiteHat Aviator',
 		'Wyzo',
 		'X-Smiles',
 		'Xiino',
@@ -315,6 +335,11 @@ class useragent_detect_browser {
 			'title' => 'Amiga {%AWeb%}',
 			'code' => 'amiga-aweb',
 		),
+		'antfresco' => array(
+			'link' => 'http://www.espial.com/',
+			'title' => 'ANT {%Fresco%}',
+			'code' => 'antfresco',
+		),
 		'mrchrome' => array(
 			'link' => 'http://amigo.mail.ru/',
 			'title' => 'Amigo',
@@ -370,6 +395,7 @@ class useragent_detect_browser {
 			'title' => '{%Beonex%}',
 			'code' => 'beonex',
 		),
+		// Baidu Browser Spark does not have own UA.
 		'baidubrowser' => array(
 			'link' => 'http://browser.baidu.com/',
 			'title' => '{%baidubrowser%}',
@@ -384,11 +410,6 @@ class useragent_detect_browser {
 			'link' => 'http://browser.baidu.com/',
 			'title' => '{%BaiduHD%}',
 			'code' => 'bidubrowser',
-		),
-		'blackberry' => array(
-			'link' => 'http://www.blackberry.com/',
-			'title' => '{%BlackBerry%}',
-			'code' => 'blackberry',
 		),
 		'blackbird' => array(
 			'link' => 'http://www.blackbirdbrowser.com/',
@@ -631,9 +652,19 @@ class useragent_detect_browser {
 			'code' => 'epiphany',
 		),
 		'escape' => array(
-			'link' => 'http://www.espial.com/products/evo_browser/',
+			'link' => 'http://www.espial.com/products/tv-browser/',
 			'title' => '{%Escape%}',
 			'code' => 'espialtvbrowser',
+		),
+		'espial' => array(
+			'link' => 'http://www.espial.com/products/tv-browser/',
+			'title' => '{%Espial%}',
+			'code' => 'espialtvbrowser',
+		),
+		'fbav' => array(
+			'link' => 'https://www.facebook.com',
+			'title' => '{%FBAV%}',
+			'code' => 'facebook',
 		),
 		'fennec' => array(
 			'link' => 'https://wiki.mozilla.org/Fennec',
@@ -675,9 +706,24 @@ class useragent_detect_browser {
 			'title' => 'GO {%Browser%}',
 			'code' => 'gobrowser',
 		),
-		'google wireless transcoder' => array(
-			'link' => 'http://google.com/gwt/n',
-			'title' => 'Google Wireless Transcoder',
+		'google earth' => array(
+			'link' => 'http://earth.google.com/',
+			'title' => '{%Google Earth%}',
+			'code' => 'google',
+		),
+		'google.android.apps' => array(
+			'link' => 'http://www.google.com/',
+			'title' => 'Google App',
+			'code' => 'google',
+		),
+		'googleplus' => array(
+			'link' => 'http://plus.google.com/',
+			'title' => 'Google+',
+			'code' => 'google',
+		),
+		'youtube' => array(
+			'link' => 'http://www.youtube.com/',
+			'title' => '{%Youtube%}',
 			'code' => 'google',
 		),
 		'gosurf' => array(
@@ -694,6 +740,11 @@ class useragent_detect_browser {
 			'link' => 'http://www.morequick.com/',
 			'title' => '{%GreenBrowser%}',
 			'code' => 'greenbrowser',
+		),
+		'gsa' => array(
+			'link' => 'http://www.google.com',
+			'title' => '{%GSA%}',
+			'code' => 'google',
 		),
 		'hana' => array(
 			'link' => 'http://www.alloutsoftware.com/',
@@ -735,6 +786,16 @@ class useragent_detect_browser {
 			'title' => '{%MiuiBrowser%}',
 			'code' => 'miuibrowser',
 		),
+		'miuibrowser' => array(
+			'link' => 'http://www.xiaomi.com/',
+			'title' => '{%MiuiBrowser%}',
+			'code' => 'miuibrowser',
+		),
+		'microsoft office' => array(
+			'link' => 'http://www.microsoft.com',
+			'title' => 'Microsoft Office',
+			'code' => 'office',
+		),
 		'mxnitro' => array(
 			'link' => 'http://www.maxthon.com/nitro/',
 			'title' => '{%MxNitro%}',
@@ -765,6 +826,11 @@ class useragent_detect_browser {
 			'title' => 'GNU {%IceCat%}',
 			'code' => 'icecat',
 		),
+		'icedragon' => array(
+			'link' => 'https://www.comodo.com/home/browsers-toolbars/icedragon-browser.php',
+			'title' => '{%IceDragon%}',
+			'code' => 'icedragon',
+		),
 		'iceweasel' => array(
 			'link' => 'http://www.geticeweasel.org/',
 			'title' => '{%IceWeasel%}',
@@ -774,6 +840,11 @@ class useragent_detect_browser {
 			'link' => 'http://alexanderjbeston.wordpress.com/',
 			'title' => 'iNet {%Browser%}',
 			'code' => 'null',
+		),
+		'itunes' => array(
+			'link' => 'http://www.apple.com',
+			'title' => '{%iTunes%}',
+			'code' => 'itunes',
 		),
 		'irider' => array(
 			'link' => 'http://en.wikipedia.org/wiki/IRider',
@@ -819,6 +890,11 @@ class useragent_detect_browser {
 			'link' => 'http://www.kkman.com.tw/',
 			'title' => '{%KKman%}',
 			'code' => 'kkman',
+		),
+		'kinza' => array(
+			'link' => 'http://www.kinza.jp/',
+			'title' => '{%Kinza%}',
+			'code' => 'kinza',
 		),
 		'kmail' => array(
 			'link' => 'http://kontact.kde.org/kmail/',
@@ -914,6 +990,11 @@ class useragent_detect_browser {
 			'link' => 'http://browser.garage.maemo.org/',
 			'title' => '{%Tablet browser%}',
 			'code' => 'microb',
+		),
+		'micromessenger' => array(
+			'link' => 'http://weixin.qq.com/',
+			'title' => '{%MicroMessenger%}',
+			'code' => 'wechat',
 		),
 		'midori' => array(
 			'link' => 'http://www.twotoasts.de/index.php?/pages/midori_summary.html',
@@ -1014,6 +1095,11 @@ class useragent_detect_browser {
 			'link' => 'http://www.access-company.com/',
 			'title' => '{%NF-Browser%}',
 			'code' => 'netfront',
+		),
+		'nichrome/self' => array(
+			'link' => 'http://soft.rambler.ru/browser/',
+			'title' => '{%Nichrome/self%}',
+			'code' => 'nichromeself',
 		),
 		'nokiabrowser' => array(
 			'link' => 'http://browser.nokia.com/',
@@ -1125,10 +1211,20 @@ class useragent_detect_browser {
 			'title' => '{%Polaris%}',
 			'code' => 'polaris',
 		),
+		'polarity' => array(
+			'link' => 'http://polarityweb.weebly.com/',
+			'title' => '{%Polarity%}',
+			'code' => 'polarity',
+		),
 		'prism' => array(
 			'link' => 'http://prism.mozillalabs.com/',
 			'title' => '{%Prism%}',
 			'code' => 'prism',
+		),
+		'puffin' => array(
+			'link' => 'http://www.puffinbrowser.com/index.php',
+			'title' => '{%Puffin%}',
+			'code' => 'puffin',
 		),
 		'qqbrowser' => array(
 			'link' => 'http://browser.qq.com/',
@@ -1144,6 +1240,11 @@ class useragent_detect_browser {
 			'link' => 'http://www.qtweb.net/',
 			'title' => 'QtWeb Internet {%Browser%}',
 			'code' => 'qtwebinternetbrowser',
+		),
+		'qtcarbrowser' => array(
+			'link' => 'http://www.teslamotors.com/',
+			'title' => '{%qtcarbrowser%}',
+			'code' => 'tesla',
 		),
 		'qupzilla' => array(
 			'link' => 'http://www.qupzilla.com/',
@@ -1174,6 +1275,11 @@ class useragent_detect_browser {
 			'link' => 'http://www.saayaa.com/',
 			'title' => 'SaaYaa Explorer',
 			'code' => 'saayaa',
+		),
+		'sailfishbrowser' => array(
+			'link' => 'https://github.com/sailfishos/sailfish-browser',
+			'title' => '{%SailfishBrowser%}',
+			'code' => 'sailfishbrowser',
 		),
 		'seamonkey' => array(
 			'link' => 'http://www.seamonkey-project.org/',
@@ -1235,6 +1341,11 @@ class useragent_detect_browser {
 			'title' => '{%SlimBrowser%}',
 			'code' => 'slimbrowser',
 		),
+		'superbird' => array(
+			'link' => 'http://superbird-browser.com',
+			'title' => '{%Superbird%}',
+			'code' => 'superbird',
+		),
 		'smarttv' => array(
 			'link' => 'http://www.freethetvchallenge.com/details/faq',
 			'title' => '{%SmartTV%}',
@@ -1264,11 +1375,6 @@ class useragent_detect_browser {
 			'link' => 'http://digola.com/sundance.html',
 			'title' => '{%Sundance%}',
 			'code' => 'sundance',
-		),
-		'sunrise' => array(
-			'link' => 'http://www.sundialbrowser.com/',
-			'title' => '{%Sundial%}',
-			'code' => 'sundial',
 		),
 		'sunrise' => array(
 			'link' => 'http://www.sunrisebrowser.com/',
@@ -1335,9 +1441,14 @@ class useragent_detect_browser {
 			'title' => '{%Thunderbird%}',
 			'code' => 'thunderbird',
 		),
-		'tizen' => array(
+		'tizenbrowser' => array(
 			'link' => 'https://www.tizen.org/',
-			'title' => '{%Tizen%}',
+			'title' => '{%Tizenbrowser%}',
+			'code' => 'tizen',
+		),
+		'tizen browser' => array(
+			'link' => 'https://www.tizen.org/',
+			'title' => '{%Tizen Browser%}',
 			'code' => 'tizen',
 		),
 		'tjusig' => array(
@@ -1435,6 +1546,11 @@ class useragent_detect_browser {
 			'title' => '{%IEMobile%}',
 			'code' => 'msie-mobile',
 		),
+		'waterfox' => array(
+			'link' => 'https://www.waterfoxproject.org/',
+			'title' => '{%WaterFox%}',
+			'code' => 'waterfox',
+		),
 		'webianshell' => array(
 			'link' => 'http://webian.org/shell/',
 			'title' => 'Webian {%Shell%}',
@@ -1450,6 +1566,21 @@ class useragent_detect_browser {
 			'title' => 'Weltweitimnetz {%Browser%}',
 			'code' => 'weltweitimnetzbrowser',
 		),
+		'weibo' => array(
+			'link' => 'http://www.weibo.com',
+			'title' => '{%Weibo%}',
+			'code' => 'weibo',
+		),
+		'whatsapp' => array(
+			'link' => 'https://web.whatsapp.com/',
+			'title' => '{%WhatsApp%}',
+			'code' => 'whatsapp',
+		),
+		'whitehat aviator' => array(
+			'link' => 'https://www.whitehatsec.com/aviator/',
+			'title' => '{%WhiteHat Aviator%}',
+			'code' => 'aviator',
+		),
 		'wkiosk' => array(
 			'link' => 'http://www.app4mac.com/store/index.php?target=products&product_id=9',
 			'title' => 'wKiosk',
@@ -1463,7 +1594,7 @@ class useragent_detect_browser {
 		'wyzo' => array(
 			'link' => 'http://www.wyzo.com/',
 			'title' => '{%Wyzo%}',
-			'code' => 'Wyzo',
+			'code' => 'wyzo',
 		),
 		'x-smiles' => array(
 			'link' => 'http://www.xsmiles.org/',
@@ -1503,6 +1634,8 @@ class useragent_detect_browser {
 		'none' => array(
 			'link' => '#',
 			'title' => 'Unknown',
+			'name' => 'Unknown',
+			'version' => '',
 			'code' => 'unknown',
 		),
 
@@ -1514,9 +1647,11 @@ class useragent_detect_browser {
 
 		$link = '';
 		$title = '';
-		$code = '';
+		$version = '';
+		$image_url = '';
 		$web_browser = '';
 		$mobile = 0;
+		$version_object = null;
 
 		$result = array();
 		$regExList = '/(' . implode('|', self::$browserRegEx) . ')/i';
@@ -1525,7 +1660,17 @@ class useragent_detect_browser {
 			$name = strtolower($result[1]);
 			if (isset(self::$browserList[$name])) {
 				$result = self::$browserList[$name];
-				$result['title'] = preg_replace_callback('/\{\%(.+)\%\}/', array('useragent_detect_browser', 'detect_browser_version'), $result['title']);
+				$browserNameArray = explode('{%', $result['title']);
+				$regmatch = null;
+				if (preg_match('/\{\%(.+)\%\}/', $result['title'], $regmatch)) {
+					$version_object = self::get_version(array('', $regmatch[1]));
+					$result['version'] = $version_object['version'];
+					$result['name'] = $browserNameArray[0] . $version_object['title'];
+					$result['title'] = $result['name'] . ($result['version'] == '' ? '' : ' ' . $result['version']);
+				} else {
+					$result['name'] = $result['title'];
+					$result['version'] = '';
+				}
 				return $result;
 			} else {
 				return self::$browserList['none'];
@@ -1533,224 +1678,220 @@ class useragent_detect_browser {
 		} elseif (preg_match('/Galaxy/i', $useragent)
 			&& !preg_match('/Chrome/i', $useragent)) {
 			$link = "http://www.traos.org/";
-			$title = self::detect_browser_version(array('', 'Galaxy'));
-			$code = "galaxy";
+			$version_object = self::get_version(array('', 'Galaxy'));
+			$image_url = "galaxy";
 		} elseif (preg_match('/Opera Mini/i', $useragent)) {
 			$link = "http://www.opera.com/mini/";
-			$title = self::detect_browser_version(array('', 'Opera Mini'));
-			$code = "opera-2";
+			$version_object = self::get_version(array('', 'Opera Mini'));
+			$image_url = "opera-2";
 		} elseif (preg_match('/Opera Mobi/i', $useragent)) {
 			$link = "http://www.opera.com/mobile/";
-			$title = self::detect_browser_version(array('', 'Opera Mobi'));
-			$code = "opera-2";
+			$version_object = self::get_version(array('', 'Opera Mobi'));
+			$image_url = "opera-2";
 		} elseif (preg_match('/Opera Labs/i', $useragent)
 			|| (preg_match('/Opera/i', $useragent)
 				&& preg_match('/Edition Labs/i', $useragent))) {
 			$link = "http://labs.opera.com/";
-			$title = self::detect_browser_version(array('', 'Opera Labs'));
-			$code = "opera-next";
+			$version_object = self::get_version(array('', 'Opera Labs'));
+			$image_url = "opera-next";
 		} elseif (preg_match('/Opera Next/i', $useragent)
 			|| (preg_match('/Opera/i', $useragent)
 				&& preg_match('/Edition Next/i', $useragent))) {
 			$link = "http://www.opera.com/support/kb/view/991/";
-			$title = self::detect_browser_version(array('', 'Opera Next'));
-			$code = "opera-next";
+			$version_object = self::get_version(array('', 'Opera Next'));
+			$image_url = "opera-next";
 		} elseif (preg_match('/Opera/i', $useragent)) {
 			$link = "http://www.opera.com/";
-			$title = self::detect_browser_version(array('', 'Opera'));
-			$code = "opera-1";
+			$version_object = self::get_version(array('', 'Opera'));
+			$image_url = "opera-1";
 			if (preg_match('/Version/i', $useragent)) {
-				$code = "opera-2";
+				$image_url = "opera-2";
 			}
 
 		} elseif (preg_match('/OPR/i', $useragent)) {
 			$link = "http://www.opera.com/";
 			if (preg_match('/(Edition Next)/i', $useragent)) {
-				$title = self::detect_browser_version(array('', 'Opera Next'));
-				$code = "opera-next";
+				$version_object = self::get_version(array('', 'Opera Next'));
+				$image_url = "opera-next";
 			} elseif (preg_match('/(Edition Developer)/i', $useragent)) {
-				$title = self::detect_browser_version(array('', 'Opera Developer'));
-				$code = "opera-developer";
+				$version_object = self::get_version(array('', 'Opera Developer'));
+				$image_url = "opera-developer";
 			} else {
-				$title = self::detect_browser_version(array('', 'Opera'));
-				$code = "opera-1";
+				$version_object = self::get_version(array('', 'Opera'));
+				$image_url = "opera-1";
 			}
 
 		} elseif (preg_match('/Series60/i', $useragent)
 			&& !preg_match('/Symbian/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Web_Browser_for_S60";
-			$title = "Nokia " . self::detect_browser_version(array('', 'Series60'));
-			$code = "s60";
+			$title = "Nokia";
+			$version_object = self::get_version(array('', 'Series60'));
+			$image_url = "s60";
 		} elseif (preg_match('/S60/i', $useragent)
 			&& !preg_match('/Symbian/i', $useragent)) {
 			$link = "http://en.wikipedia.org/wiki/Web_Browser_for_S60";
-			$title = "Nokia " . self::detect_browser_version(array('', 'S60'));
-			$code = "s60";
+			$title = "Nokia";
+			$version_object = self::get_version(array('', 'S60'));
+			$image_url = "s60";
 		} elseif (preg_match('/SE\ /i', $useragent)
 			&& preg_match('/MetaSr/i', $useragent)) {
 			$link = "http://ie.sogou.com/";
 			$title = "Sogou Explorer";
-			$code = "sogou";
+			$image_url = "sogou";
 
 		} elseif ((preg_match('/Ubuntu\;\ Mobile/i', $useragent) || preg_match('/Ubuntu\;\ Tablet/i', $useragent) &&
 			preg_match('/WebKit/i', $useragent))) {
 			$link = "https://launchpad.net/webbrowser-app";
 			$title = "Ubuntu Web Browser";
-			$code = "ubuntuwebbrowser";
-			$code = "ubuntuwebbrowser";
+			$image_url = "ubuntuwebbrowser";
+			$image_url = "ubuntuwebbrowser";
 
 		} elseif (preg_match('/Avant\ Browser/i', $useragent)) {
 			$link = "http://www.avantbrowser.com/";
-			$title = "Avant " . self::detect_browser_version(array('', 'Browser'));
-			$code = "avantbrowser";
+			$title = "Avant ";
+			$version_object = self::get_version(array('', 'Browser'));
+			$image_url = "avantbrowser";
 		} elseif (preg_match('/AppleWebkit/i', $useragent)
 			&& preg_match('/Android/i', $useragent)
 			&& !preg_match('/Chrome/i', $useragent)) {
 			$link = "http://developer.android.com/reference/android/webkit/package-summary.html";
-			$title = self::detect_browser_version(array('', 'Android Webkit'));
-			$code = "android-webkit";
-		} elseif (preg_match('/Chrome/i', $useragent)) {
+			$version_object = self::get_version(array('', 'Android Webkit'));
+			$image_url = "android-webkit";
 
-			// Note: For IE11 Experimental Web Platform Features in Windows 10
-			// Spartan? Who knows.
-			if (preg_match('/Windows NT 1.+Edge/i', $useragent)) {
-				$link = "http://www.microsoft.com/windows/products/winfamily/ie/default.mspx";
-				$title = "Internet Explorer " . self::detect_browser_version(array('', 'Spartan'));
-				$code = "msie11";
+		} elseif (preg_match('/Windows.+Chrome.+Edge/i', $useragent)) {
+			// Project Spartan
+			$link = "http://windows.microsoft.com/en-us/windows/preview-microsoft-edge-pc";
+			$version_object = self::get_version(array('', 'Edge'));
+			$image_url = "edge";
+
+		} elseif (preg_match('/Chrome|crios/i', $useragent)) {
+
+			if (preg_match('/crios/i', $useragent)) {
+				$link = "http://google.com/chrome/";
+				$title = "Google ";
+				$version_object = self::get_version(array('', 'CriOS'));
+				$image_url = "chrome";
 			} else {
 				$link = "http://google.com/chrome/";
-				$title = "Google " . self::detect_browser_version(array('', 'Chrome'));
-				$code = "chrome";
+				$title = "Google ";
+				$version_object = self::get_version(array('', 'Chrome'));
+				$image_url = "chrome";
 			}
 		} elseif (preg_match('/Safari/i', $useragent)
 			&& !preg_match('/Nokia/i', $useragent)) {
 			$link = "http://www.apple.com/safari/";
-			$title = "Safari";
 
 			if (preg_match('/Version/i', $useragent)) {
-				$title = self::detect_browser_version(array('', 'Safari'));
+				$version_object = self::get_version(array('', 'Safari'));
+			} else {
+				$title = 'Safari';
 			}
-
-			if (preg_match('/Mobile Safari/i', $useragent)) {
+			if (preg_match('/Mobile ?Safari/i', $useragent)) {
 				$title = "Mobile " . $title;
 			}
 
-			$code = "safari";
+			$image_url = "safari";
 		} elseif (preg_match('/Nokia/i', $useragent) && !preg_match('/Trident/i', $useragent)) {
 			$link = "http://www.nokia.com/browser";
 			$title = "Nokia Web Browser";
-			$code = "maemo";
+			$image_url = "maemo";
 		} elseif (preg_match('/Firefox/i', $useragent)) {
 			$link = "http://www.mozilla.org/";
-			$title = self::detect_browser_version(array('', 'Firefox'));
-			$code = "firefox";
+			$version_object = self::get_version(array('', 'Firefox'));
+			$image_url = "firefox";
 		} elseif (preg_match('/MSIE/i', $useragent) || preg_match('/Trident/i', $useragent)) {
 			$link = "http://www.microsoft.com/windows/products/winfamily/ie/default.mspx";
-			$title = "Internet Explorer" . self::detect_browser_version(array('', 'MSIE'));
+			$title = "Internet Explorer";
+			$version_object = self::get_version(array('', 'MSIE'));
 
+			$image_url = "msie";
 			if (preg_match('/MSIE[\ |\/]?([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
 				// We have IE10 or older
 			} elseif (preg_match('/\ rv:([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
 				// We have IE11 or newer
 			}
-
 			if (count($regmatch) > 0) {
-				if ($regmatch[1] >= 11) {
-					$code = "msie11";
-				} elseif ($regmatch[1] >= 10) {
-					$code = "msie10";
-				} elseif ($regmatch[1] >= 9) {
-					$code = "msie9";
-				} elseif ($regmatch[1] >= 7) {
-					// also ie8
-					$code = "msie7";
-				} elseif ($regmatch[1] >= 6) {
-					$code = "msie6";
-				} elseif ($regmatch[1] >= 4) {
-					// also ie5
-					$code = "msie4";
-				} elseif ($regmatch[1] >= 3) {
-					$code = "msie3";
-				} elseif ($regmatch[1] >= 2) {
-					$code = "msie2";
-				} elseif ($regmatch[1] >= 1) {
-					$code = "msie1";
+				$ie_version = (int) $regmatch[1];
+				if ($ie_version >= 11) {
+					$image_url = "msie11";
+				} elseif ($ie_version == 8) {
+					$image_url = "msie7";
+				} elseif ($ie_version == 5) {
+					$image_url = "msie4";
+				} else {
+					$image_url = "msie" . $ie_version;
 				}
-			}
-			if ($code == '') {
-				$code = "msie";
 			}
 		} elseif (preg_match('/Mozilla/i', $useragent)) {
 			$link = "http://www.mozilla.org/";
 			$title = "Mozilla Compatible";
-
-			if (preg_match('/rv:([.0-9a-zA-Z]+)/i', $useragent, $regmatch)) {
-				$title = "Mozilla " . $regmatch[1];
-			}
-
-			$code = "mozilla";
+			$image_url = "mozilla";
 		} else {
 			$link = "#";
 			$title = "Unknown";
-			$code = "null";
+			$image_url = "null";
+		}
+
+		$full = '';
+		if (!is_null($version_object)) {
+			$version = $version_object['version'];
+			$title .= $version_object['title'];
+			$full = $title . ($version == "" ? '' : ' ' . $version);
+		} else {
+			$full = $title;
 		}
 
 		return array(
 			'link' => $link,
-			'title' => $title,
-			'code' => $code,
+			'title' => $full, // compatibility
+			'name' => $title,
+			'version' => $version,
+			'code' => $image_url,
 		);
 	}
 
-/**
- * Detect Web Browser versions
- */
-	static function detect_browser_version($object) {
+	static function get_version($object) {
 		$useragent = self::$useragent;
 		$title = $object[1];
 		$lower_title = strtolower($title);
 		$return = '';
 		// Fix for Opera's UA string changes in v10.00+ (and others)
 		$start = $title;
-		if (($lower_title == "opera"
-			|| $lower_title == "opera next"
-			|| $lower_title == "opera labs")
-			&& preg_match('/Version/i', $useragent)) {
+		if (
+			preg_match('/Version/i', $useragent)
+			&&
+			((($lower_title == "opera" || $lower_title == "opera next" || $lower_title == "opera labs")) ||
+				($lower_title == "opera mobi") ||
+				($lower_title == "safari") ||
+				($lower_title == "pre") ||
+				($lower_title == "android webkit"))
+		) {
 			$start = "Version";
 		} elseif (($lower_title == "opera"
 			|| $lower_title == "opera next"
 			|| $lower_title == "opera developer")
 			&& preg_match('/OPR/i', $useragent)) {
 			$start = "OPR";
-		} elseif ($lower_title == "opera mobi"
-			&& preg_match('/Version/i', $useragent)) {
-			$start = "Version";
-		} elseif ($lower_title == "safari"
-			&& preg_match('/Version/i', $useragent)) {
-			$start = "Version";
-		} elseif ($lower_title == "pre"
-			&& preg_match('/Version/i', $useragent)) {
-			$start = "Version";
-		} elseif ($lower_title == "android webkit") {
-			$start = "Version";
 		} elseif ($lower_title == "links") {
 			$start = "Links (";
 		} elseif ($lower_title == "uc browser") {
 			$start = "UC Browser";
-		} elseif ($lower_title == "tenfourfox") {
-			$start = " rv";
-		} elseif ($lower_title == "classilla") {
-			$start = " rv";
 		} elseif ($lower_title == "smarttv") {
 			$start = "WebBrowser";
 		} elseif ($lower_title == "ucweb"
 			&& preg_match('/UCBrowser/i', $useragent)) {
 			$start = "UCBrowser";
-		} elseif ($lower_title == "msie" && preg_match('/\ rv:([.0-9a-zA-Z]+)/i', $useragent)) {
+		} elseif (
+			($lower_title == "tenfourfox") ||
+			($lower_title == "classilla") ||
+			($lower_title == "msie" && preg_match('/\ rv:([.0-9a-zA-Z]+)/i', $useragent))
+		) {
 			// We have IE11 or newer
 			$start = " rv";
 		} elseif ($lower_title == "spartan") {
 			$start = "edge";
+		} elseif ($lower_title == "nichrome/self") {
+			$start = "self";
 		}
 
 		// Grab the browser version if its present
@@ -1768,61 +1909,80 @@ class useragent_detect_browser {
 			&& $version == "7.0"
 			&& preg_match('/Trident\/4.0/i', $useragent)) {
 			$return = " 8.0 (Compatibility Mode)"; // Fix for IE8 quirky UA string with Compatibility Mode enabled
+			$version = "";
 		} elseif ($lower_title == "msie") {
-			$return = " " . $version;
-		} elseif ($lower_title == "multi-browser") {
-			$return = "Multi-Browser XP " . $version;
+			$return = "";
 		} elseif ($lower_title == "nf-browser") {
-			$return = "NetFront " . $version;
+			$return = "NetFront";
 		} elseif ($lower_title == "semc-browser") {
-			$return = "SEMC Browser " . $version;
+			$return = "SEMC Browser";
 		} elseif ($lower_title == "ucweb" || $lower_title == "ubrowser" || $lower_title == "ucbrowser" || $lower_title == "uc browser") {
-			$return = "UC Browser " . $version;
+			$return = "UC Browser";
 		} elseif ($lower_title == "bidubrowser" || $lower_title == "baidubrowser" || $lower_title == "baiduhd") {
-			$return = "Baidu Browser " . $version;
+			$return = "Baidu Browser";
 		} elseif ($lower_title == "up.browser"
 			|| $lower_title == "up.link") {
-			$return = "Openwave Mobile Browser " . $version;
+			$return = "Openwave Mobile Browser";
 		} elseif ($lower_title == "chromeframe") {
-			$return = "Google Chrome Frame " . $version;
+			$return = "Google Chrome Frame";
 		} elseif ($lower_title == "mozilladeveloperpreview") {
-			$return = "Mozilla Developer Preview " . $version;
-		} elseif ($lower_title == "multi-browser") {
-			$return = "Multi-Browser XP " . $version;
+			$return = "Mozilla Developer Preview";
 		} elseif ($lower_title == "opera mobi") {
-			$return = "Opera Mobile " . $version;
+			$return = "Opera Mobile";
 		} elseif ($lower_title == "osb-browser") {
-			$return = "Gtk+ WebCore " . $version;
+			$return = "Gtk+ WebCore";
 		} elseif ($lower_title == "tablet browser") {
-			$return = "MicroB " . $version;
+			$return = "MicroB";
 		} elseif ($lower_title == "crmo") {
-			$return = "Chrome Mobile " . $version;
+			$return = "Chrome Mobile";
 		} elseif ($lower_title == "smarttv") {
-			$return = "Maple Browser " . $version;
-		} elseif ($lower_title == "wp-android"
-			|| $lower_title == "wp-iphone") {
-			//TODO check into Android version being $return =ed
-			$return = "Wordpress App " . $version;
+			$return = "Maple Browser";
 		} elseif ($lower_title == "atomicbrowser") {
-			$return = "Atomic Web Browser " . $version;
+			$return = "Atomic Web Browser";
 		} elseif ($lower_title == "barcapro") {
-			$return = "Barca Pro " . $version;
+			$return = "Barca Pro";
 		} elseif ($lower_title == "dplus") {
-			$return = "D+ " . $version;
+			$return = "D+";
+		} elseif ($lower_title == "micromessenger") {
+			$return = "WeChat";
+		} elseif ($lower_title == "nichrome/self") {
+			$return = "NiChrome";
+		} elseif ($lower_title == "gsa") {
+			$return = "Google Search App";
+		} elseif ($lower_title == "fbav") {
+			$return = "Facebook";
+		} elseif ($lower_title == "tizenbrowser") {
+			$return = "Tizen Browser";
+		} elseif ($lower_title == "sailfishbrowser") {
+			$return = "Sailfish Browser";
+		} elseif ($lower_title == "miuibrowser") {
+			$return = "MIUI Browser";
 		} elseif ($lower_title == "opera labs") {
-			preg_match('/Edition\ Labs([\ ._0-9a-zA-Z]+);/i', $useragent, $regmatch);
-			$return = $title . $regmatch[1] . " " . $version;
+			if (preg_match('/Edition\ Labs([\ ._0-9a-zA-Z]+);/i', $useragent, $regmatch)) {
+				$return = $title . $regmatch[1];
+			} else {
+				$return = $title;
+			}
+		} elseif ($lower_title == 'qtcarbrowser') {
+			$return = "Tesla Car Browser";
+			$version = "";
 		} elseif ($lower_title == "iceweasel") {
 			if ($version == "Firefox") {
 				$version = "";
 			}
-
-			$return = $title . " " . $version;
+			$return = $title;
 		} else {
-			$return = $title . " " . $version;
+			$return = $title;
 		}
 
-		return $return;
+		if (strtolower($version) == "build") {
+			$version = ''; // To Fix some ua like 'Amazon Otter Build/KTU84M';
+		}
+
+		return array(
+			"title" => $return,
+			"version" => trim($version),
+		);
 	}
 
 }
